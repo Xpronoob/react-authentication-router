@@ -13,6 +13,7 @@ import Button from './components/ui/Button'
 import { useDarkMode } from './hooks/useDarkMode'
 
 const Login = lazy(() => import('./pages/Login/Login'))
+const Register = lazy(() => import('./pages/Register/Register'))
 const Private = lazy(() => import('./pages/Private/Private'))
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
             <RoutesWithNotFound>
               <Route path="/" element={<Navigate to={PrivateRoutes.PRIVATE} />} />
               <Route path={PublicRoutes.LOGIN} element={<Login />} />
+              <Route path={PublicRoutes.REGISTER} element={<Register />} />
               <Route element={<AuthGuard privateValidation={true} />}>
                 <Route path={`${PrivateRoutes.PRIVATE}/*`} element={<Private />} />
               </Route>
