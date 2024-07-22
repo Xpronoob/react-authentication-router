@@ -1,8 +1,5 @@
-const baseUrl = 'https://rickandmortyapi.com/api/'
+import AxiosAdapter from '../lib/axios.adapter'
 
-const characterUrl = baseUrl + 'character/'
-
-export const getMorty = () =>{
-  return fetch(characterUrl + '2')
-  .then(res => res.json())
+export const postLogin = (email: string, password: string) => {
+  return AxiosAdapter.postRequestLogin('/login', { email, password })
 }
