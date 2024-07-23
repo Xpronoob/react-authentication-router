@@ -1,13 +1,13 @@
 // Login.tsx
-import { createUser, resetUser, UserKey } from '../../redux/states/user'
+import { createUser, resetUser, UserKey } from '../../../redux/states/user'
 import { useNavigate } from 'react-router-dom'
-import { PrivateRoutes, PublicRoutes } from '../../models'
+import { PrivateRoutes, PublicRoutes } from '../../../models'
 import { useEffect, useState } from 'react'
-import { clearLocalStorage } from '../../utilities'
+import { clearLocalStorage } from '../../../utilities'
 import { useDispatch } from 'react-redux'
-import { postLogin } from '../../services'
+import { postLoginService, postRequestService } from '../../../services'
 import { useForm } from 'react-hook-form'
-import Input from '../../components/ui/Input'
+import Input from '../../../components/ui/Input'
 
 const Login = () => {
   const dispatch = useDispatch()
@@ -22,7 +22,7 @@ const Login = () => {
 
   const onSubmit = async (data: any) => {
     try {
-      const response = await postLogin(data.email, data.password)
+      const response = await postLoginService(data.email, data.password)
 
       if (response.status === 200) {
         dispatch(createUser(response.data.user))

@@ -1,13 +1,14 @@
-import { createUser, resetUser, UserKey } from '../../redux/states/user'
+import { createUser, resetUser, UserKey } from '../../../redux/states/user'
 import { useNavigate } from 'react-router-dom'
-import { PrivateRoutes } from '../../models'
+import { PrivateRoutes } from '../../../models'
 import { useEffect, useState } from 'react'
-import { clearLocalStorage } from '../../utilities'
+import { clearLocalStorage } from '../../../utilities'
 import { useDispatch } from 'react-redux'
-import { postLogin } from '../../services'
+import { postRegisterService } from '../../../services'
 import { useForm } from 'react-hook-form'
-import Input from '../../components/ui/Input'
-import Button from '../../components/ui/Button'
+import Input from '../../../components/ui/Input'
+import Button from '../../../components/ui/Button'
+import Label from '../../../components/ui/Label'
 
 const Register = () => {
   const dispatch = useDispatch()
@@ -23,7 +24,7 @@ const Register = () => {
 
   const onSubmit = async (data: any) => {
     try {
-      const response = await postLogin(data.email, data.password)
+      const response = await postRegisterService(data.name, data.email, data.password)
 
       if (response.status === 200) {
         dispatch(createUser(response.data.user))
@@ -54,6 +55,30 @@ const Register = () => {
       <div className="flex justify-center">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="">
+            <Label>Complete Name</Label>
+            <Input
+              type="text"
+              placeholder="Name"
+              // a to z with accents, 1 to 20 characters
+              {...register('name', {
+                required: 'Name is required',
+                pattern: {
+                  value: /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]{1,21}$/,
+                  message: 'Invalid Name',
+                },
+                maxLength: {
+                  value: 20,
+                  message: 'Name must be more than 20 characters',
+                },
+              })}
+            />
+            {errors.name && (
+              <p className="mt-2 text-md text-red-600">{errors.name?.message}</p>
+            )}
+          </div>
+
+          <Label>Email</Label>
+          <div className="">
             <Input
               type="text"
               placeholder="example@email.com"
@@ -76,6 +101,7 @@ const Register = () => {
 
           <div className="flex gap-1">
             <div className="">
+              <Label>Password</Label>
               <Input
                 type="password"
                 placeholder="Password"
@@ -93,6 +119,7 @@ const Register = () => {
             </div>
 
             <div className="">
+              <Label>Repeat Password</Label>
               <Input
                 type="password"
                 placeholder="Confirm Password"
