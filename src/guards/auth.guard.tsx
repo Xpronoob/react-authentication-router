@@ -1,7 +1,7 @@
-import { useSelector } from "react-redux"
-import { AppStore } from "../redux/store"
-import { Navigate, Outlet } from "react-router-dom"
-import { PrivateRoutes, PublicRoutes } from "../models"
+import { useSelector } from 'react-redux'
+import { AppStore } from '../redux/store'
+import { Navigate, Outlet } from 'react-router-dom'
+import { PrivateRoutes, PublicRoutes } from '../models'
 
 interface Props {
   privateValidation: boolean
@@ -10,8 +10,8 @@ interface Props {
 const PrivateValidationFragment = <Outlet />
 const PublicValidationFragment = <Navigate replace to={PrivateRoutes.PRIVATE} />
 
-export const AuthGuard = ({privateValidation}: Props) =>{
-  const userState = useSelector((store:AppStore) => store.user)
+export const AuthGuard = ({ privateValidation }: Props) => {
+  const userState = useSelector((store: AppStore) => store.user)
   return userState.name ? (
     privateValidation ? (
       PrivateValidationFragment

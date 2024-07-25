@@ -1,19 +1,22 @@
 import './App.css'
 import { BrowserRouter, Navigate, Route } from 'react-router-dom'
-import { PrivateRoutes, PublicRoutes, Roles } from './models'
+import { AdminUserRoutes, PrivateRoutes, PublicRoutes, Roles } from './models'
 import { AuthGuard, RoleGuard } from './guards'
 import { RoutesWithNotFound } from './utilities'
 import { Suspense, lazy } from 'react'
 import { Provider } from 'react-redux'
 import store from './redux/store'
 import { Logout } from './components/Logout'
-import { Dashboard } from './pages/Private/Dashboard'
 import Button from './components/ui/Button'
 
 import { useDarkMode } from './hooks/useDarkMode'
+import Users from './pages/Admin/Users/Users'
+import Navigation from './components/ui/Navigation'
 
-const Login = lazy(() => import('./pages/Login/Login'))
-const Register = lazy(() => import('./pages/Register/Register'))
+// import Index from './pages/Public/Index/Index'
+const Index = lazy(() => import('./pages/Public/Index/Index'))
+const Login = lazy(() => import('./pages/Public/Login/Login'))
+const Register = lazy(() => import('./pages/Public/Register/Register'))
 const Private = lazy(() => import('./pages/Private/Private'))
 
 function App() {
@@ -24,17 +27,20 @@ function App() {
       <Suspense fallback={<>Cargando</>}>
         <Provider store={store}>
           <BrowserRouter>
+            <Navigation />
             <Button onClick={toggleTheme}>🌒🌘{theme}</Button>
             <Logout />
             <RoutesWithNotFound>
-              <Route path="/" element={<Navigate to={PrivateRoutes.PRIVATE} />} />
+              <Route path="/" element={<Index />} />
               <Route path={PublicRoutes.LOGIN} element={<Login />} />
               <Route path={PublicRoutes.REGISTER} element={<Register />} />
+
               <Route element={<AuthGuard privateValidation={true} />}>
                 <Route path={`${PrivateRoutes.PRIVATE}/*`} element={<Private />} />
               </Route>
-              <Route element={<RoleGuard rol={Roles.ADMIN} />}>
-                <Route path={PrivateRoutes.DASHBOARD} element={<Dashboard />} />
+
+              <Route element={<RoleGuard role={Roles.ADMIN_USER} />}>
+                <Route path={`${AdminUserRoutes.USERS}/*`} element={<Users />} />
               </Route>
             </RoutesWithNotFound>
           </BrowserRouter>
