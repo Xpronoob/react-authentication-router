@@ -40,6 +40,7 @@ const Register = () => {
 
   useEffect(() => {
     // Limpiar cualquier estado de usuario existente y localStorage al cargar el componente
+    //@ts-ignore
     dispatch(resetUser())
     clearLocalStorage(UserKey)
   }, [dispatch])
@@ -72,7 +73,7 @@ const Register = () => {
                 },
               })}
             />
-            {errors.name && (
+            {errors.name && typeof errors.name.message === 'string' && (
               <p className="mt-2 text-md text-red-600">{errors.name?.message}</p>
             )}
           </div>
@@ -94,7 +95,7 @@ const Register = () => {
                 },
               })}
             />
-            {errors.email && (
+            {errors.email && typeof errors.email.message === 'string' && (
               <p className="mt-2 text-md text-red-600">{errors.email?.message}</p>
             )}
           </div>
@@ -113,7 +114,7 @@ const Register = () => {
                   },
                 })}
               />
-              {errors.password && (
+              {errors.password && typeof errors.password.message === 'string' && (
                 <p className="mt-2 text-md text-red-600">{errors.password?.message}</p>
               )}
             </div>
@@ -128,9 +129,12 @@ const Register = () => {
                   validate: value => value === password || 'Passwords do not match',
                 })}
               />
-              {errors.confirmPassword && (
-                <p className="mt-2 text-md text-red-600">{errors.confirmPassword?.message}</p>
-              )}
+              {errors.confirmPassword &&
+                typeof errors.confirmPassword.message === 'string' && (
+                  <p className="mt-2 text-md text-red-600">
+                    {errors.confirmPassword?.message}
+                  </p>
+                )}
             </div>
           </div>
 

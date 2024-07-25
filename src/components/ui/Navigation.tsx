@@ -25,7 +25,7 @@ function Navigation() {
       ACCOUNT
     </Link>
   )
-  const register = <Link to={PublicRoutes.REGISTER}>REGISTER</Link>
+  // const register = <Link to={PublicRoutes.REGISTER}>REGISTER</Link>
 
   return (
     <nav className="bg-gray-100 dark:bg-gray-950">

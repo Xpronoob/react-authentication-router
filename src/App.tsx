@@ -1,5 +1,5 @@
 import './App.css'
-import { BrowserRouter, Navigate, Route } from 'react-router-dom'
+import { BrowserRouter, Route } from 'react-router-dom'
 import { AdminUserRoutes, PrivateRoutes, PublicRoutes, Roles } from './models'
 import { AuthGuard, RoleGuard } from './guards'
 import { RoutesWithNotFound } from './utilities'

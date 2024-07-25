@@ -1,11 +1,11 @@
 // Login.tsx
 import { createUser, resetUser, UserKey } from '../../../redux/states/user'
 import { useNavigate } from 'react-router-dom'
-import { PrivateRoutes, PublicRoutes } from '../../../models'
+import { PrivateRoutes } from '../../../models'
 import { useEffect, useState } from 'react'
 import { clearLocalStorage } from '../../../utilities'
 import { useDispatch } from 'react-redux'
-import { postLoginService, postRequestService } from '../../../services'
+import { postLoginService } from '../../../services'
 import { useForm } from 'react-hook-form'
 import Input from '../../../components/ui/Input'
 
@@ -40,6 +40,7 @@ const Login = () => {
 
   useEffect(() => {
     // Limpiar cualquier estado de usuario existente y localStorage al cargar el componente
+    //@ts-ignore
     dispatch(resetUser())
     clearLocalStorage(UserKey)
   }, [dispatch])
@@ -65,8 +66,9 @@ const Login = () => {
             },
           })}
         />
-        {errors.email && <p className="mt-2 text-md text-red-600">{errors.email?.message}</p>}
-
+        {errors.email && typeof errors.email.message === 'string' && (
+          <p className="mt-2 text-md text-red-600">{errors.email.message}</p>
+        )}
         <Input
           type="password"
           placeholder="Password"
@@ -78,7 +80,7 @@ const Login = () => {
             },
           })}
         />
-        {errors.password && (
+        {errors.password && typeof errors.password.message === 'string' && (
           <p className="mt-2 text-md text-red-600">{errors.password?.message}</p>
         )}
 

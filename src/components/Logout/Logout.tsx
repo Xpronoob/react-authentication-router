@@ -11,6 +11,7 @@ function Logout() {
 
   const logOut = () => {
     clearLocalStorage(UserKey)
+    //@ts-ignore
     dispatch(resetUser())
     try {
       postLogoutServices()
