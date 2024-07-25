@@ -6,10 +6,6 @@ import { RoutesWithNotFound } from './utilities'
 import { Suspense, lazy } from 'react'
 import { Provider } from 'react-redux'
 import store from './redux/store'
-import { Logout } from './components/Logout'
-import Button from './components/ui/Button'
-
-import { useDarkMode } from './hooks/useDarkMode'
 import Users from './pages/Admin/Users/Users'
 import Navigation from './components/ui/Navigation'
 
@@ -20,16 +16,12 @@ const Register = lazy(() => import('./pages/Public/Register/Register'))
 const Private = lazy(() => import('./pages/Private/Private'))
 
 function App() {
-  const [theme, toggleTheme] = useDarkMode()
-
   return (
     <div className="App bg-white dark:bg-slate-900 min-h-screen text-gray-200">
       <Suspense fallback={<>Cargando</>}>
         <Provider store={store}>
           <BrowserRouter>
             <Navigation />
-            <Button onClick={toggleTheme}>🌒🌘{theme}</Button>
-            <Logout />
             <RoutesWithNotFound>
               <Route path="/" element={<Index />} />
               <Route path={PublicRoutes.LOGIN} element={<Login />} />
