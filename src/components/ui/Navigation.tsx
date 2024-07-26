@@ -47,7 +47,9 @@ function Navigation() {
           {/* DESKTOP MENU */}
           <div className="flex-1 flex items-center justify-around">
             <div className="flex-shrink-0">
-              <img className="h-9 w-auto" src={logo} alt="Logo" />
+              <Link to="/">
+                <img className="h-9 w-auto" src={logo} alt="Logo" />
+              </Link>
             </div>
             <div className="hidden sm:block sm:ml-6">
               <div className="flex space-x-4">
