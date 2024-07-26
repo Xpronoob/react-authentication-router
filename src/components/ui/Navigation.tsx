@@ -7,6 +7,7 @@ import Button from './Button'
 import { Logout } from '../Logout'
 import { useDarkMode } from '../../hooks/useDarkMode'
 import logo from '../../../public/logo.png'
+import ButtonHovered from './ButtonHovered'
 
 function Navigation() {
   const userState = useSelector((store: AppStore) => store.user)
@@ -19,11 +20,8 @@ function Navigation() {
   }
 
   const login = (
-    <Link
-      to={PublicRoutes.LOGIN}
-      className="text-gray-900 dark:text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-    >
-      ACCOUNT
+    <Link to={PublicRoutes.LOGIN}>
+      <ButtonHovered>ACCOUNT</ButtonHovered>
     </Link>
   )
   // const register = <Link to={PublicRoutes.REGISTER}>REGISTER</Link>
