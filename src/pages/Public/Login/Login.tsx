@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux'
 import { postLoginService } from '../../../services'
 import { useForm } from 'react-hook-form'
 import Input from '../../../components/ui/Input'
+import Button from '../../../components/ui/Button'
 
 const Login = () => {
   const dispatch = useDispatch()
@@ -46,8 +47,8 @@ const Login = () => {
   }, [dispatch])
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <img src="" alt="" />
+    <div className="flex flex-col items-center justify-center">
+      <img src="./logo.png" alt="Logo" className="h-24" />
       <h2 className="">Welcome again!</h2>
       <p>Please login to continue</p>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -88,7 +89,7 @@ const Login = () => {
           <p className="mt-2 text-md text-red-600">User not found</p>
         )}
 
-        <button type="submit">LOGIN</button>
+        <Button type="submit">LOGIN</Button>
       </form>
     </div>
   )
