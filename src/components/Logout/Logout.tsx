@@ -18,6 +18,10 @@ function Logout() {
     } catch (error) {}
     navigate(PublicRoutes.LOGIN, { replace: true })
   }
-  return <button onClick={logOut}>Log Out</button>
+  return (
+    <button className="dark:text-white" onClick={logOut}>
+      Log Out
+    </button>
+  )
 }
 export default Logout
