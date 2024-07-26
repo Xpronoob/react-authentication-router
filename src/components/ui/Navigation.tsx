@@ -8,6 +8,7 @@ import { Logout } from '../Logout'
 import { useDarkMode } from '../../hooks/useDarkMode'
 import logo from '../../../public/logo.png'
 import ButtonHovered from './ButtonHovered'
+import { CircleUserRound, Heart, Moon, ShoppingBasket, Sun } from 'lucide-react'
 
 function Navigation() {
   const userState = useSelector((store: AppStore) => store.user)
@@ -77,9 +78,22 @@ function Navigation() {
                 </Link>
               </div>
             </div>
-            <div className="hidden gap-2 sm:flex">
+            <div className="hidden gap-1 sm:flex">
               {userState?.id ? <Logout /> : login}
-              <Button onClick={toggleTheme}>{theme === 'dark' ? '🌙' : '🌞'}</Button>
+
+              <div className="flex items-center justify-center">
+                <Heart color="red" size={27} strokeWidth={1} />
+                <ShoppingBasket color="#009933" size={29} strokeWidth={1} />
+                <CircleUserRound color="#007780" size={29} strokeWidth={1} />
+                {/* <Button onClick={toggleTheme}>{theme === 'dark' ? '🌙' : '🌞'}</Button> */}
+              </div>
+              <button onClick={toggleTheme}>
+                {theme === 'dark' ? (
+                  <Moon color="white" size={29} strokeWidth={1} />
+                ) : (
+                  <Sun color="black" size={29} strokeWidth={1} />
+                )}
+              </button>
             </div>
           </div>
         </div>
