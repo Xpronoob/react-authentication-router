@@ -17,7 +17,7 @@ const Private = lazy(() => import('./pages/Private/Private'))
 
 function App() {
   return (
-    <div className="App bg-white dark:bg-slate-900 min-h-screen text-gray-200">
+    <div className="App bg-gray-50 dark:bg-slate-900 min-h-screen text-gray-900 dark:text-gray-200">
       <Suspense fallback={<>Cargando</>}>
         <Provider store={store}>
           <BrowserRouter>
