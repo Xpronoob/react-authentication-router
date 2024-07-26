@@ -1,6 +1,6 @@
 import './App.css'
 import { BrowserRouter, Route } from 'react-router-dom'
-import { AdminUserRoutes, PrivateRoutes, PublicRoutes, Roles } from './models'
+import { AdminRoutes, AdminUserRoutes, PrivateRoutes, PublicRoutes, Roles } from './models'
 import { AuthGuard, RoleGuard } from './guards'
 import { RoutesWithNotFound } from './utilities'
 import { Suspense, lazy } from 'react'
@@ -29,6 +29,10 @@ function App() {
 
               <Route element={<AuthGuard privateValidation={true} />}>
                 <Route path={`${PrivateRoutes.PRIVATE}/*`} element={<Private />} />
+              </Route>
+
+              <Route element={<RoleGuard role={Roles.ADMIN} />}>
+                <Route path={`${AdminRoutes.ADMIN}/*`} element={<Users />} />
               </Route>
 
               <Route element={<RoleGuard role={Roles.ADMIN_USER} />}>
