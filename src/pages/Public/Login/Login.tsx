@@ -9,6 +9,7 @@ import { postLoginService } from '../../../services'
 import { useForm } from 'react-hook-form'
 import Input from '../../../components/ui/Input'
 import Button from '../../../components/ui/Button'
+import Label from '../../../components/ui/Label'
 
 const Login = () => {
   const dispatch = useDispatch()
@@ -47,49 +48,53 @@ const Login = () => {
   }, [dispatch])
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="bg-gray-100 dark:bg-gray-950 flex flex-col items-center justify-center gap-2 px-10 py-8 min-w-[350px]">
       <img src="./logo.png" alt="Logo" className="h-24" />
       <h2 className="">Welcome again!</h2>
       <p>Please login to continue</p>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          type="text"
-          placeholder="Email"
-          {...register('email', {
-            required: 'Email is required',
-            pattern: {
-              value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
-              message: 'Invalid email address',
-            },
-            maxLength: {
-              value: 50,
-              message: 'Email must be less than 50 characters',
-            },
-          })}
-        />
-        {errors.email && typeof errors.email.message === 'string' && (
-          <p className="mt-2 text-md text-red-600">{errors.email.message}</p>
-        )}
-        <Input
-          type="password"
-          placeholder="Password"
-          {...register('password', {
-            required: 'Password is required',
-            minLength: {
-              value: 8,
-              message: 'Password must be at least 8 characters',
-            },
-          })}
-        />
-        {errors.password && typeof errors.password.message === 'string' && (
-          <p className="mt-2 text-md text-red-600">{errors.password?.message}</p>
-        )}
+        <div className="sm:min-w-[300px]">
+          <Label>Email</Label>
+          <Input
+            type="text"
+            placeholder="Email"
+            {...register('email', {
+              required: 'Email is required',
+              pattern: {
+                value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+                message: 'Invalid email address',
+              },
+              maxLength: {
+                value: 50,
+                message: 'Email must be less than 50 characters',
+              },
+            })}
+          />
+          {errors.email && typeof errors.email.message === 'string' && (
+            <p className="mt-2 text-md text-red-600">{errors.email.message}</p>
+          )}
+          <Label>Password</Label>
+          <Input
+            type="password"
+            placeholder="Password"
+            {...register('password', {
+              required: 'Password is required',
+              minLength: {
+                value: 8,
+                message: 'Password must be at least 8 characters',
+              },
+            })}
+          />
+          {errors.password && typeof errors.password.message === 'string' && (
+            <p className="mt-2 text-md text-red-600">{errors.password?.message}</p>
+          )}
 
-        {postError.response?.status == 400 && (
-          <p className="mt-2 text-md text-red-600">User not found</p>
-        )}
+          {postError.response?.status == 400 && (
+            <p className="mt-2 text-md text-red-600">User not found</p>
+          )}
 
-        <Button type="submit">LOGIN</Button>
+          <Button type="submit">LOGIN</Button>
+        </div>
       </form>
     </div>
   )
