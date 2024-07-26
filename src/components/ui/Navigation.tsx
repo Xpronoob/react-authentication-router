@@ -6,6 +6,7 @@ import { useState } from 'react'
 import Button from './Button'
 import { Logout } from '../Logout'
 import { useDarkMode } from '../../hooks/useDarkMode'
+import logo from '../../../public/logo.png'
 
 function Navigation() {
   const userState = useSelector((store: AppStore) => store.user)
@@ -44,13 +45,9 @@ function Navigation() {
           </div>
 
           {/* DESKTOP MENU */}
-          <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+          <div className="flex-1 flex items-center justify-around">
             <div className="flex-shrink-0">
-              <img
-                className="h-8 w-auto"
-                src="https://wilsonclinic.com/wp-content/uploads/2018/12/placeholder-logo-2.png"
-                alt="Logo"
-              />
+              <img className="h-9 w-auto" src={logo} alt="Logo" />
             </div>
             <div className="hidden sm:block sm:ml-6">
               <div className="flex space-x-4">
@@ -64,23 +61,25 @@ function Navigation() {
                   to="#"
                   className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                 >
-                  Office
+                  Category #1
                 </Link>
                 <Link
                   to="#"
                   className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                 >
-                  Windows
+                  Category #2
                 </Link>
                 <Link
                   to="#"
                   className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                 >
-                  Antivirus
+                  Category #3
                 </Link>
-                {userState?.id ? <Logout /> : login}
-                <Button onClick={toggleTheme}>{theme === 'dark' ? '🌙' : '🌞'}</Button>
               </div>
+            </div>
+            <div className="hidden gap-2 sm:flex">
+              {userState?.id ? <Logout /> : login}
+              <Button onClick={toggleTheme}>{theme === 'dark' ? '🌙' : '🌞'}</Button>
             </div>
           </div>
         </div>
@@ -97,19 +96,19 @@ function Navigation() {
             to="#"
             className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
           >
-            Office
+            Category #1
           </Link>
           <Link
             to="#"
             className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
           >
-            Windows
+            Category #2
           </Link>
           <Link
             to="#"
             className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
           >
-            Antivirus
+            Category #3
           </Link>
           {userState?.id ? <Logout /> : login}
           <Button onClick={toggleTheme}>{theme === 'dark' ? '🌙' : '🌞'}</Button>
