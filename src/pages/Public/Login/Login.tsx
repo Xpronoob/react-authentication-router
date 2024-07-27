@@ -28,7 +28,7 @@ const Login = () => {
 
       if (response.status === 200) {
         dispatch(createUser(response.data.user))
-        navigate(`/${PrivateRoutes.PRIVATE}`, { replace: true })
+        navigate(`/`, { replace: true })
       } else {
         // console.error('Login failed:', response.data)
         // Todo: manage errors
