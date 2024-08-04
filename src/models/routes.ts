@@ -14,14 +14,14 @@ export const AdminRoutes = {
   USERS: 'users',
 }
 
-export const AdminUserRoutes = {
-  USERS: 'admin/users',
-  GET: 'admin/users/:id',
-  POST: 'admin/users/:id',
-  PATH: 'admin/users/:id',
-  PUT: 'admin/users/:id',
-}
+// export const AdminUserRoutes = {
+//   USERS: 'admin/users',
+//   GET: 'admin/users/:id',
+//   POST: 'admin/users/:id',
+//   PATH: 'admin/users/:id',
+//   PUT: 'admin/users/:id',
+// }
 
-export const AdminProductRoutes = {
-  PRODUCTS: 'admin/products',
-}
+// export const AdminProductRoutes = {
+//   PRODUCTS: 'admin/products',
+// }
