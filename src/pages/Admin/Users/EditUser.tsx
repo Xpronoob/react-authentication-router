@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { useForm } from 'react-hook-form'
+import { useForm, SubmitHandler } from 'react-hook-form'
 import { PostUser } from '../../../models/postUser.model'
 import { findUserById } from '../../../services/user.service'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -24,8 +24,12 @@ export const EditUser = () => {
 
   const updateUserMutation = useMutation({
     mutationFn: AxiosAdapter.updateUser,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['users'] })
+    onSuccess: (data, variables) => {
+      queryClient.setQueryData(['user', variables.id], oldData => ({
+        ...(oldData || {}),
+        ...variables,
+      }))
+
       queryClient.invalidateQueries({ queryKey: ['users'] })
       queryClient.invalidateQueries({ queryKey: ['usersIds'] })
       // navigate('/')
@@ -46,7 +50,11 @@ export const EditUser = () => {
   if (isLoading) return <span>Loading user data...</span>
   if (isError) return `Error: ${error.message}`
 
-  const onSubmit = (updatedUser: PostUser) => {
+  // const onSubmit = (updatedUser: PostUser) => {
+  //   updateUserMutation.mutate({ id, ...updatedUser })
+  // }
+
+  const onSubmit: SubmitHandler<PostUser> = (updatedUser: PostUser) => {
     updateUserMutation.mutate({ id, ...updatedUser })
   }
 
