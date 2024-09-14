@@ -1,8 +1,9 @@
 import { Roles } from './roles'
 
 export interface UserInfo {
-  id: number
+  id: string
   name: string
   email: string
   roles: Roles[]
+  img: string
 }
