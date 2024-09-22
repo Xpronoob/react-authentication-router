@@ -41,7 +41,7 @@ function App() {
               <Route path={`${AdminRoutes.ADMIN}/*`} element={<IndexAdmin />} />
             </Route> */}
             {/* ROLE ADMIN USERS */}
-            <Route element={<RoleGuard role={Roles.ADMIN} />}>
+            <Route element={<RoleGuard roles={['ADMIN_ROLE', 'ADMIN_USERS']} />}>
               <Route path={AdminRoutes.ADMIN} element={<AdminLayout />}>
                 <Route index element={<IndexAdmin />} />
                 <Route path={AdminRoutes.USERS} element={<Users />} />
